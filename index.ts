@@ -16,7 +16,6 @@ enum RawTile {
 
 interface Tile {
   isAir(): boolean;
-  isFlux(): boolean;
   isUnbreakable(): boolean;
   isPlayer(): boolean;
   isStone(): boolean;
@@ -34,7 +33,6 @@ interface Tile {
 
 class Air implements Tile {
   isAir() { return true; }
-  isFlux() { return false; }
   isUnbreakable() { return false; }
   isPlayer() { return false; }
   isStone() { return false; }
@@ -61,7 +59,6 @@ class Air implements Tile {
 
 class Flux implements Tile {
   isAir() { return false; }
-  isFlux() { return true; }
   isUnbreakable() { return false; }
   isPlayer() { return false; }
   isStone() { return false; }
@@ -89,7 +86,6 @@ class Flux implements Tile {
 
 class Unbreakable implements Tile {
   isAir() { return false; }
-  isFlux() { return false; }
   isUnbreakable() { return true; }
   isPlayer() { return false; }
   isStone() { return false; }
@@ -117,7 +113,6 @@ class Unbreakable implements Tile {
 
 class Player implements Tile {
   isAir() { return false; }
-  isFlux() { return false; }
   isUnbreakable() { return false; }
   isPlayer() { return true; }
   isStone() { return false; }
@@ -144,7 +139,6 @@ class Player implements Tile {
 
 class Stone implements Tile {
   isAir() { return false; }
-  isFlux() { return false; }
   isUnbreakable() { return false; }
   isPlayer() { return false; }
   isStone() { return true; }
@@ -176,7 +170,6 @@ class Stone implements Tile {
 
 class FallingStone implements Tile {
   isAir() { return false; }
-  isFlux() { return false; }
   isUnbreakable() { return false; }
   isPlayer() { return false; }
   isStone() { return false; }
@@ -204,7 +197,6 @@ class FallingStone implements Tile {
 
 class Box implements Tile {
   isAir() { return false; }
-  isFlux() { return false; }
   isUnbreakable() { return false; }
   isPlayer() { return false; }
   isStone() { return false; }
@@ -236,7 +228,6 @@ class Box implements Tile {
 
 class FallingBox implements Tile {
   isAir() { return false; }
-  isFlux() { return false; }
   isUnbreakable() { return false; }
   isPlayer() { return false; }
   isStone() { return false; }
@@ -264,7 +255,6 @@ class FallingBox implements Tile {
 
 class Key1 implements Tile {
   isAir() { return false; }
-  isFlux() { return false; }
   isUnbreakable() { return false; }
   isPlayer() { return false; }
   isStone() { return false; }
@@ -294,7 +284,6 @@ class Key1 implements Tile {
 
 class Lock1 implements Tile {
   isAir() { return false; }
-  isFlux() { return false; }
   isUnbreakable() { return false; }
   isPlayer() { return false; }
   isStone() { return false; }
@@ -322,7 +311,6 @@ class Lock1 implements Tile {
 
 class Key2 implements Tile {
   isAir() { return false; }
-  isFlux() { return false; }
   isUnbreakable() { return false; }
   isPlayer() { return false; }
   isStone() { return false; }
@@ -352,7 +340,6 @@ class Key2 implements Tile {
 
 class Lock2 implements Tile {
   isAir() { return false; }
-  isFlux() { return false; }
   isUnbreakable() { return false; }
   isPlayer() { return false; }
   isStone() { return false; }
