@@ -466,10 +466,6 @@ function gameLoop() {
   setTimeout(() => gameLoop(), sleep);
 }
 
-window.onload = () => {
-  gameLoop();
-}
-
 const LEFT_KEY = "ArrowLeft";
 const UP_KEY = "ArrowUp";
 const RIGHT_KEY = "ArrowRight";
