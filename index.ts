@@ -21,7 +21,6 @@ interface Tile {
   isFallingStone(): boolean;
   isBox(): boolean;
   isFallingBox(): boolean;
-  isKey1(): boolean;
   isLock1(): boolean;
   isKey2(): boolean;
   isLock2(): boolean;
@@ -37,7 +36,6 @@ class Air implements Tile {
   isFallingStone() { return false; }
   isBox() { return false; }
   isFallingBox() { return false; }
-  isKey1() { return false; }
   isLock1() { return false; }
   isKey2() { return false; }
   isLock2() { return false; }
@@ -62,7 +60,6 @@ class Flux implements Tile {
   isFallingStone() { return false; }
   isBox() { return false; }
   isFallingBox() { return false; }
-  isKey1() { return false; }
   isLock1() { return false; }
   isKey2() { return false; }
   isLock2() { return false; }
@@ -88,7 +85,6 @@ class Unbreakable implements Tile {
   isFallingStone() { return false; }
   isBox() { return false; }
   isFallingBox() { return false; }
-  isKey1() { return false; }
   isLock1() { return false; }
   isKey2() { return false; }
   isLock2() { return false; }
@@ -114,7 +110,6 @@ class Player implements Tile {
   isFallingStone() { return false; }
   isBox() { return false; }
   isFallingBox() { return false; }
-  isKey1() { return false; }
   isLock1() { return false; }
   isKey2() { return false; }
   isLock2() { return false; }
@@ -139,7 +134,6 @@ class Stone implements Tile {
   isFallingStone() { return false; }
   isBox() { return false; }
   isFallingBox() { return false; }
-  isKey1() { return false; }
   isLock1() { return false; }
   isKey2() { return false; }
   isLock2() { return false; }
@@ -169,7 +163,6 @@ class FallingStone implements Tile {
   isFallingStone() { return true; }
   isBox() { return false; }
   isFallingBox() { return false; }
-  isKey1() { return false; }
   isLock1() { return false; }
   isKey2() { return false; }
   isLock2() { return false; }
@@ -195,7 +188,6 @@ class Box implements Tile {
   isFallingStone() { return false; }
   isBox() { return true; }
   isFallingBox() { return false; }
-  isKey1() { return false; }
   isLock1() { return false; }
   isKey2() { return false; }
   isLock2() { return false; }
@@ -225,7 +217,6 @@ class FallingBox implements Tile {
   isFallingStone() { return false; }
   isBox() { return false; }
   isFallingBox() { return true; }
-  isKey1() { return false; }
   isLock1() { return false; }
   isKey2() { return false; }
   isLock2() { return false; }
@@ -251,7 +242,6 @@ class Key1 implements Tile {
   isFallingStone() { return false; }
   isBox() { return false; }
   isFallingBox() { return false; }
-  isKey1() { return true; }
   isLock1() { return false; }
   isKey2() { return false; }
   isLock2() { return false; }
@@ -279,7 +269,6 @@ class Lock1 implements Tile {
   isFallingStone() { return false; }
   isBox() { return false; }
   isFallingBox() { return false; }
-  isKey1() { return false; }
   isLock1() { return true; }
   isKey2() { return false; }
   isLock2() { return false; }
@@ -305,7 +294,6 @@ class Key2 implements Tile {
   isFallingStone() { return false; }
   isBox() { return false; }
   isFallingBox() { return false; }
-  isKey1() { return false; }
   isLock1() { return false; }
   isKey2() { return true; }
   isLock2() { return false; }
@@ -333,7 +321,6 @@ class Lock2 implements Tile {
   isFallingStone() { return false; }
   isBox() { return false; }
   isFallingBox() { return false; }
-  isKey1() { return false; }
   isLock1() { return false; }
   isKey2() { return false; }
   isLock2() { return true; }
