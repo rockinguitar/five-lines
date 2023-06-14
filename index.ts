@@ -36,11 +36,11 @@ class Air implements Tile {
   }
 
   moveHorizontal(dx: number) {
-    moveToTile(playerx + dx, playery);
+    moveToTile(player.getX + dx, player.getY);
   }
 
   moveVertical(dy: number) {
-    moveToTile(playerx, playery + dy);
+    moveToTile(player.getX, player.getY + dy);
   }
 
   update(x: number, y: number) {
@@ -63,11 +63,11 @@ class Flux implements Tile {
   }
 
   moveHorizontal(dx: number) {
-    moveToTile(playerx + dx, playery);
+    moveToTile(player.getX + dx, player.getY);
   }
 
   moveVertical(dy: number) {
-    moveToTile(playerx, playery + dy);
+    moveToTile(player.getX, player.getY + dy);
   }
 
   update(x: number, y: number) {
@@ -154,10 +154,10 @@ class Resting implements FallingState {
   isFalling() { return false; }
 
   moveHorizontal(tile: Tile, dx: number) {
-    if (map[playery][playerx + dx + dx].isAir()
-      && !map[playery + 1][playerx + dx].isAir()) {
-      map[playery][playerx + dx + dx] = tile;
-      moveToTile(playerx + dx, playery);
+    if (map[player.getY][player.getX + dx + dx].isAir()
+      && !map[player.getY + 1][player.getX + dx].isAir()) {
+      map[player.getY][player.getX + dx + dx] = tile;
+      moveToTile(player.getX + dx, player.getY);
     }
   }
 
@@ -304,12 +304,12 @@ class Key implements Tile {
 
   moveHorizontal(dx: number) {
     this.keyConfiguration.removeLock();
-    moveToTile(playerx + dx, playery);
+    moveToTile(player.getX + dx, player.getY);
   }
 
   moveVertical(dy: number) {
     this.keyConfiguration.removeLock();
-    moveToTile(playerx, playery + dy);
+    moveToTile(player.getX, player.getY + dy);
   }
 
   update(x: number, y: number) {
@@ -408,8 +408,17 @@ class Down implements Input {
   }
 }
 
-let playerx = 1;
-let playery = 1;
+class Player {
+  private x = 1;
+  private y = 1;
+  get getX() { return this.x; }
+  get getY() { return this.y; }
+  setX(x: number) { this.x = x; }
+  setY(y: number) { this.y = y; }
+}
+
+let player = new Player();
+
 let rawMap: RawTile[][] = [
   [2, 2, 2, 2, 2, 2, 2, 2],
   [2, 3, 0, 1, 1, 2, 0, 2],
@@ -474,18 +483,18 @@ function check(y: number, x: number) {
 }
 
 function moveToTile(newx: number, newy: number) {
-  map[playery][playerx] = new Air();
+  map[player.getY][player.getX] = new Air();
   map[newy][newx] = new PlayerTile();
-  playerx = newx;
-  playery = newy;
+  player.setX(newx);
+  player.setY(newy);
 }
 
 function moveHorizontal(dx: number) {
-  map[playery][playerx + dx].moveHorizontal(dx);
+  map[player.getY][player.getX + dx].moveHorizontal(dx);
 }
 
 function moveVertical(dy: number) {
-  map[playery + dy][playerx].moveVertical(dy);
+  map[player.getY + dy][player.getX].moveVertical(dy);
 }
 
 function update() {
@@ -523,7 +532,7 @@ function createGraphics() {
 
 function drawPlayer(g: CanvasRenderingContext2D) {
   g.fillStyle = "#ff0000";
-  g.fillRect(playerx * TILE_SIZE, playery * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+  g.fillRect(player.getX * TILE_SIZE, player.getY * TILE_SIZE, TILE_SIZE, TILE_SIZE);
 }
 
 function drawMap(g: CanvasRenderingContext2D) {
