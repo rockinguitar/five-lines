@@ -22,6 +22,7 @@ interface Tile {
   moveHorizontal(dx: number): void;
   moveVertical(dy: number): void;
   update(x: number, y: number): void;
+  getBlockOnTopState(): FallingState;
 }
 
 class Air implements Tile {
@@ -44,6 +45,10 @@ class Air implements Tile {
 
   update(x: number, y: number) {
 
+  }
+
+  getBlockOnTopState() {
+    return new Falling();
   }
 }
 
@@ -68,6 +73,10 @@ class Flux implements Tile {
   update(x: number, y: number) {
 
   }
+
+  getBlockOnTopState() {
+    return new Resting();
+  }
 }
 
 class Unbreakable implements Tile {
@@ -91,6 +100,10 @@ class Unbreakable implements Tile {
   update(x: number, y: number) {
 
   }
+
+  getBlockOnTopState() {
+    return new Resting();
+  }
 }
 
 class Player implements Tile {
@@ -113,11 +126,16 @@ class Player implements Tile {
   update(x: number, y: number) {
 
   }
+
+  getBlockOnTopState() {
+    return new Resting();
+  }
 }
 
 interface FallingState {
   isFalling(): boolean;
   moveHorizontal(tile: Tile, dx: number): void;
+  drop(tile: Tile, x: number, y: number): void;
 }
 
 class Falling implements FallingState {
@@ -125,6 +143,11 @@ class Falling implements FallingState {
 
   moveHorizontal(tile: Tile, dx: number) {
 
+  }
+
+  drop(tile: Tile, x: number, y: number) {
+    map[y + 1][x] = tile;
+    map[y][x] = new Air();
   }
 }
 class Resting implements FallingState {
@@ -137,6 +160,8 @@ class Resting implements FallingState {
       moveToTile(playerx + dx, playery);
     }
   }
+
+  drop(tile: Tile, x: number, y: number) { }
 }
 
 class FallStrategy {
@@ -149,17 +174,8 @@ class FallStrategy {
   }
 
   update(tile: Tile, x: number, y: number) {
-    this.falling = map[y + 1][x].isAir()
-      ? new Falling()
-      : new Resting();
-    this.drop(y, x, tile);
-  }
-
-  private drop(y: number, x: number, tile: Tile) {
-    if (this.falling.isFalling()) {
-      map[y + 1][x] = tile;
-      map[y][x] = new Air();
-    }
+    this.falling = map[y + 1][x].getBlockOnTopState();
+    this.falling.drop(tile, x, y);
   }
 }
 
@@ -191,6 +207,10 @@ class Stone implements Tile {
   update(x: number, y: number) {
     this.fallStrategy.update(this, x, y);
   }
+
+  getBlockOnTopState() {
+    return new Resting();
+  }
 }
 
 class Box implements Tile {
@@ -220,6 +240,10 @@ class Box implements Tile {
 
   update(x: number, y: number) {
     this.fallStrategy.update(this, x, y);
+  }
+
+  getBlockOnTopState() {
+    return new Resting();
   }
 }
 
@@ -291,6 +315,10 @@ class Key implements Tile {
   update(x: number, y: number) {
 
   }
+
+  getBlockOnTopState() {
+    return new Resting();
+  }
 }
 
 class LockTile implements Tile {
@@ -316,6 +344,10 @@ class LockTile implements Tile {
 
   update(x: number, y: number) {
 
+  }
+
+  getBlockOnTopState() {
+    return new Resting();
   }
 }
 
